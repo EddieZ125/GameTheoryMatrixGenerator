@@ -157,7 +157,7 @@ public class Generador {
         
         for(int i = 0; i < equivalentes.size(); i++){
             valores = equivalentes.get(i).getValores();
-            System.out.print("Ecuacion para estrategia " +(i+1) + ": ");
+            System.out.print("Ecuación para estrategia " +(i+1) + ": ");
             noEsCero = false;
             for(int j = 0; j < 4; j++){
                 if(valores[j]!=0){
