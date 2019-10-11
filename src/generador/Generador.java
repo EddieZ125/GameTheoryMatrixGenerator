@@ -30,6 +30,7 @@ public class Generador {
         matriz = new int[estrategiasA.length][jugadas.size()];
         int a1, a2;
         boolean estaEnEquivalente;
+        boolean noEsCero;
         
         
         for(int i = 0; i < estrategiasA.length; i++ ) {
@@ -151,6 +152,37 @@ public class Generador {
         }
         System.out.println("");
 
+        System.out.println("s.a.");
+        System.out.println("Ecuaciones: ");
+        
+        for(int i = 0; i < equivalentes.size(); i++){
+            valores = equivalentes.get(i).getValores();
+            System.out.print("Ecuacion para estrategia " +(i+1) + ": ");
+            noEsCero = false;
+            for(int j = 0; j < 4; j++){
+                if(valores[j]!=0){
+                    
+                    if(valores[j]>0 && noEsCero){
+                        System.out.print("+");
+                    }
+                    if(valores[j]<0 && noEsCero){
+                        System.out.print("");
+                    }
+                    noEsCero = true;
+                    System.out.print(valores[j] + "*X" + (j+1));
+                }
+            }
+            if(noEsCero){
+                System.out.print("\t>= v");
+                System.out.println("");
+            }
+        }
+        
+        
+        System.out.println("X1 + X2 + X3 + X4 = 1");
+        System.out.println("X1 >= 0 \t X2 >= 0 \t X3 >= 0 \t X4 >= 0 \t v irrestricta");
+        
+        
         /*for(int i = 0; i < jugadas.size(); i++){
             System.out.print(jugadas.get(i));
             if(i < jugadas.size()-1){
