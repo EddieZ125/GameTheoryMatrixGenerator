@@ -50,7 +50,7 @@ public class Generador {
                     }
                 } 
                 
-                matriz[i][j] = -(4-a2); // aqui asigno valor a la casilla basicamente es 4 menos el numero de pasos totales hasta destruir el barco y como es para el jugador A el valor es negativo
+                matriz[i][j] = a2; // aqui asigno valor a la casilla basicamente es 4 menos el numero de pasos totales hasta destruir el barco y como es para el jugador A el valor es negativo
             }
         }
 
