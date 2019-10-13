@@ -16,6 +16,35 @@ public class Generador {
     /**
      * @param args the command line arguments
      */
+    
+    public static void ecuaciones(int m[][]){
+        
+        System.out.println("\ns.a.");
+        System.out.println("Ecuaciones: ");
+        
+        for(int i = 0; i < m[0].length; i++){
+            System.out.print("Ecuación para estrategia " +(i+1) + ": \t");
+            
+            for(int j = 0; j < m.length; j++){
+                if(j == 0){
+                    System.out.print(m[j][i]+"*X"+(j+1));   
+                }else{
+                    System.out.print("+"+m[j][i]+"*X"+(j+1));
+                }
+                
+            }
+            
+            System.out.print("\t>= v");
+            System.out.println("");
+            
+        }
+        
+        
+        System.out.println("X1 + X2 + X3 + X4 = 1");
+        System.out.println("X1 >= 0 \t X2 >= 0 \t X3 >= 0 \t X4 >= 0 \t v irrestricta");
+        
+    }
+    
     public static int[][] refactorizar_matriz(int m[][], int x, int y, int tipo){
         
         int k=0;
@@ -119,6 +148,8 @@ public class Generador {
             ver_matriz(m);
             
         }while(seguir);
+        
+        ecuaciones(m);
     }
     
     public static int [][] igualar(int m[][]){
@@ -290,8 +321,8 @@ public class Generador {
         }
         
         dominadas(m);
-        ver_matriz(m);
                 
+        /*
         System.out.println("\ns.a.");
         System.out.println("Ecuaciones: ");
         
@@ -321,6 +352,7 @@ public class Generador {
         
         System.out.println("X1 + X2 + X3 + X4 = 1");
         System.out.println("X1 >= 0 \t X2 >= 0 \t X3 >= 0 \t X4 >= 0 \t v irrestricta");
+        */
         
         
         /*for(int i = 0; i < jugadas.size(); i++){
