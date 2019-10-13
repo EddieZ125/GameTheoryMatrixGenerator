@@ -16,6 +16,132 @@ public class Generador {
     /**
      * @param args the command line arguments
      */
+    public static int[][] refactorizar_matriz(int m[][], int x, int y, int tipo){
+        
+        int k=0;
+        int aux[][] = new int[y][x];
+        
+        if(tipo == 0){
+            
+            for (int i = 0; i < m[0].length; i++) {
+                if(m[0][i] != 0){
+                    for (int j = 0; j < m.length; j++) {
+                        aux[j][k] = m[j][i];
+                    }
+                    k++;
+                }
+            }
+            return aux;
+        }else{
+            
+            
+        }
+        return m;
+    }
+    public static void dominadas(int m[][]){
+        
+        int y, x;
+        y = m.length;
+        x = m[0].length;
+        
+        int aux[][] = new int[y][x];
+        int auxB[][] = new int[y][x];
+        
+        aux = igualar(m);
+        auxB = igualar(m);
+        
+        boolean flag = true; // false = filas, true = columnas
+        boolean seguir = false;
+        
+        do{
+            
+            seguir = false;
+            
+            if(flag){ // Columnas
+                System.out.println("\nDominadas de Columnas.");
+                for (int i = 0; i < m[0].length; i++) {
+                    for (int j = i+1; j < m[0].length; j++) {
+                        auxB = igualar(aux);
+                        for (int k = 0; k < m.length; k++) {
+                            auxB[k][j] = 0;
+                            if(m[k][i] > m[k][j]){
+                                break;
+                            }else if((k+1) == m.length){
+                                seguir = true;
+                                flag = false;
+                                System.out.println("Columna: "+(i+1)+" Domina a Columna: "+(j+1));
+                                aux = igualar(auxB);
+                            }
+                        } 
+                    }
+                    if(aux[0][i] == 0){
+                        x--;
+                    }
+                }
+                
+                System.out.println("\nColumnas que quedan: "+x);
+                
+                
+            }else{ // Filas
+                
+                System.out.println("\nDominadas de Filas.");
+                for (int i = 0; i < m.length; i++) {
+                    for (int j = i+1; j < m.length; j++) {
+                        auxB = igualar(aux);
+                        for (int k = 0; k < m[0].length; k++) {
+                            auxB[j][k] = 0;
+                            if(m[i][k] < m[j][k]){
+                                break;
+                            }else if(k == m[0].length){
+                                seguir = true;
+                                flag = true;
+                                System.out.println("Fila: "+(i+1)+" Dominada por Fila: "+(j+1));
+                                aux = igualar(auxB);
+                            }
+                        } 
+                    }
+                    
+                    if(aux[i][0] == 0){
+                        y--;
+                    }
+                }
+                
+                System.out.println("\nFilas que quedan: "+y);
+            }
+            
+            System.out.println("Matriz resultante");
+            ver_matriz(aux);
+            System.out.println("\nMatriz factorizada");
+            m = new int[aux.length][aux[0].length];
+            m = igualar(refactorizar_matriz(aux, x, aux.length, 0));
+            aux = new int[aux.length][aux[0].length];
+            aux = igualar(m);
+            ver_matriz(m);
+            
+        }while(seguir);
+    }
+    
+    public static int [][] igualar(int m[][]){
+        
+        int aux[][] = new int[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[0].length; j++) {
+                aux[i][j] = m[i][j];
+            }
+        }
+        return aux;
+    }
+    
+    public static void ver_matriz(int m[][]){
+        
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[0].length; j++) {
+                System.out.print(m[i][j]+" ");
+            }
+            System.out.println("");
+        }
+    }
+    
     public static void main(String[] args){
         String str = "12345";
         Permutador pe = new Permutador(str,str.length());
@@ -109,7 +235,7 @@ public class Generador {
         
         System.out.println("Numero de estrategias totales: " + estrategiasTotales);
         System.out.println("Numero de instancias de equivalentes: " + equivalentes.size());
-        System.out.print("\t");
+        System.out.print("\n\t");
         for(int i = 0; i < equivalentes.size(); i++){
             System.out.print(" "+(i+1)+"\t");
         }
@@ -150,14 +276,28 @@ public class Generador {
             }
             System.out.print(valores[3] + "\t");
         }
-        System.out.println("");
-
-        System.out.println("s.a.");
+        
+        System.out.println("\n\nEstrategias Dominadas");
+        
+        int m[][] = new int[valores.length][equivalentes.size()];
+        int v[] = new int[valores.length];
+        
+        for (int i = 0; i < equivalentes.size(); i++) {
+            v = equivalentes.get(i).getValores();
+            for (int j = 0; j < valores.length; j++) {
+                m[j][i] = v[j];
+            }
+        }
+        
+        dominadas(m);
+        ver_matriz(m);
+                
+        System.out.println("\ns.a.");
         System.out.println("Ecuaciones: ");
         
         for(int i = 0; i < equivalentes.size(); i++){
             valores = equivalentes.get(i).getValores();
-            System.out.print("Ecuación para estrategia " +(i+1) + ": ");
+            System.out.print("Ecuación para estrategia " +(i+1) + ": \t");
             noEsCero = false;
             for(int j = 0; j < 4; j++){
                 if(valores[j]!=0){
@@ -205,8 +345,7 @@ public class Generador {
         
         System.out.println("");
         System.out.println("Numero de estrategias jugador B: " + jugadas.size());*/
-
-    
+       
     }
       
 
