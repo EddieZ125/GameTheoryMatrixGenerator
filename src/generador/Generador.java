@@ -89,11 +89,11 @@ public class Generador {
             if(flag){ // Columnas
                 System.out.println("\nDominadas de Columnas.");
                 for (int i = 0; i < m[0].length; i++) {
-                    for (int j = i+1; j < m[0].length; j++) {
+                    for (int j = 0; j < m[0].length; j++) {
                         auxB = igualar(aux);
                         for (int k = 0; k < m.length; k++) {
                             auxB[k][j] = 0;
-                            if(m[k][i] > m[k][j]){
+                            if(m[k][i] > m[k][j] || i==j){
                                 break;
                             }else if((k+1) == m.length){
                                 seguir = true;
@@ -103,23 +103,26 @@ public class Generador {
                             }
                         } 
                     }
+                    
+                }
+
+                for(int i=0; i<m[0].length; i++){
                     if(aux[0][i] == 0){
                         x--;
                     }
-                }
+                } 
                 
                 System.out.println("\nColumnas que quedan: "+x);
-                
                 
             }else{ // Filas
                 
                 System.out.println("\nDominadas de Filas.");
                 for (int i = 0; i < m.length; i++) {
-                    for (int j = i+1; j < m.length; j++) {
+                    for (int j = 0; j < m.length; j++) {
                         auxB = igualar(aux);
                         for (int k = 0; k < m[0].length; k++) {
                             auxB[j][k] = 0;
-                            if(m[i][k] < m[j][k]){
+                            if(m[i][k] < m[j][k] || i==j){
                                 break;
                             }else if(k == m[0].length){
                                 seguir = true;
@@ -130,6 +133,9 @@ public class Generador {
                         } 
                     }
                     
+                }
+
+                for(int i = 0; i<m.length; i++){
                     if(aux[i][0] == 0){
                         y--;
                     }
