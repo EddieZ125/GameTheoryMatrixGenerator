@@ -180,16 +180,16 @@ public class Generador {
     }
     
     public static void main(String[] args){
-        String str = "12345";
+        String str = "123456";
         Permutador pe = new Permutador(str,str.length());
         List<String> jugadas;
         List<Equivalente> equivalentes;
         equivalentes = new ArrayList<>();
-        int[] estrategiasA = {1,2,3,4};
+        int[] estrategiasA = {1,2,3,4,5};
         jugadas = pe.getJugadas();
         int[][] matriz;
         int[] valores;
-        valores = new int[4];
+        valores = new int[5];
         matriz = new int[estrategiasA.length][jugadas.size()];
         int a1, a2;
         boolean estaEnEquivalente;
@@ -200,7 +200,7 @@ public class Generador {
             for(int j = 0; j < jugadas.size(); j++){
                 a1 = 0;
                 a2 = 0;
-                for(int k = 0; k < 5; k++){
+                for(int k = 0; k < 6; k++){
                     
                     if(Integer.toString(estrategiasA[i]).equals(jugadas.get(j).charAt(k)+"") 
                             || Integer.toString(estrategiasA[i]+1).equals(jugadas.get(j).charAt(k)+"")){
@@ -231,14 +231,15 @@ public class Generador {
 
                 temporal.addEstrategia(jugadas.get(i));
 
-                temporal.setValores(matriz[0][i],matriz[1][i],matriz[2][i],matriz[3][i]);
+                temporal.setValores(matriz[0][i],matriz[1][i],matriz[2][i],matriz[3][i],matriz[4][i]);
 
 
                 for(int j = i+1; j < jugadas.size(); j++){
                     if(matriz[0][i] == matriz[0][j] 
                             && matriz[1][i] == matriz[1][j]
                             && matriz[2][i] == matriz[2][j]
-                            && matriz[3][i] == matriz[3][j]){
+                            && matriz[3][i] == matriz[3][j]
+                            && matriz[4][i] == matriz[4][j]){
                         /*System.out.println("------------------------------------------");
                         System.out.println("Valor de i = " + i + "   Valor de j = " + j);
                         System.out.println("Las estrategias " + jugadas.get(i) 
@@ -313,6 +314,18 @@ public class Generador {
             }
             System.out.print(valores[3] + "\t");
         }
+        
+        System.out.println("");
+        System.out.print("E:\t");
+        for(int i = 0; i < equivalentes.size(); i++){
+            valores = equivalentes.get(i).getValores();
+            if(valores[4] >= 0){
+                System.out.print(" ");
+            }
+            System.out.print(valores[4] + "\t");
+        }
+        
+
         
         System.out.println("\n\nEstrategias Dominadas");
         
